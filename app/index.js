@@ -31,6 +31,8 @@ app.set('views', './views');
 
 app.get('/', (req, res) => {
     res.locals.machines = MACHINES;
+    res.locals.ams = ['A', 'B', 'C', 'D'];
+    res.locals.trays = ['1', '2', '3', '4'];
     res.render('home');
 });
 

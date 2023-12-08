@@ -7,32 +7,11 @@ const connect = () => {
     const ws = new WebSocket(WS_SERVER);
     ws.onmessage = (event) => {
         const json = JSON.parse(event.data);
-        console.log(json);
-        if (json.data && json.data.mc_percent) {
-            const sel = `.machine_${json.printer.id} .status .progress .progress-bar`;
-            const el = document.querySelector(sel);
-            let percent = json.data.mc_percent + '%';
-            if (percent === '100%') {
-                json.data.mc_remaining_time = '0';       
-            }
-            el.innerHTML = percent;
-            el.style.width = percent;
+        if (json.data && json.data.ams) {
+            handleAMS(json);
         }
-        if (json.data && json.data.mc_remaining_time) {
-            const sel = `.machine_${json.printer.id} .status .remaining`;
-            document.querySelector(sel).innerHTML = `${json.data.mc_remaining_time} remaining`;
-        }
-        if (json.data && json.data.subtask_name) {
-            const sel = `.machine_${json.printer.id} .status .task_name`;
-            document.querySelector(sel).innerHTML = json.data.subtask_name.replace('.gcode.3mf', '');
-        }
-        if (json.data && json.data.total_layer_num) {
-            const sel = `.machine_${json.printer.id} .status .total_layer_num`;
-            document.querySelector(sel).innerHTML = json.data.total_layer_num;
-        }
-        if (json.data && json.data.layer_num) {
-            const sel = `.machine_${json.printer.id} .status .active_layer`;
-            document.querySelector(sel).innerHTML = json.data.layer_num;
+        if (json.data) {
+            handleMachineInfo(json);
         }
     };
 
@@ -48,3 +27,110 @@ const connect = () => {
 };
 connect();
 
+const handleAMS = (json) => {
+    //console.log(json);
+    const SEL = `.machine_${json.printer.id} .ams`;
+    const AMS = json.data.ams.ams;
+    //testing
+    /*
+    if (AMS.length == 2) {
+        const ams3 = JSON.parse(JSON.stringify(AMS[0]));
+        const ams4 = JSON.parse(JSON.stringify(AMS[1]));
+        ams3.id = 2;
+        ams4.id = 3;
+        AMS.push(ams3);
+        AMS.push(ams4);
+    }*/
+    AMS.forEach((ams) => {
+        //console.log(ams);
+        const sel = `${SEL} .ams_${ams.id}`;
+        document.querySelector(sel).classList.remove('visually-hidden');
+        document.querySelector(`${sel} .temp`).innerHTML = ams.temp;
+        document.querySelector(`${sel} .humidity`).innerHTML = ams.humidity;
+
+        ams.tray.forEach((tray) => {
+            const sel = `${SEL} .ams_${ams.id} .tray_${tray.id}`;
+            const isEmpty = Object.keys(tray).length === 1;
+            // Tooltip
+            let title = `Tray is empty!`;
+            if (!isEmpty) {
+                let name = tray.name || tray.tray_type;
+                title = `${name}<br>${tray.remain}% remaining`;
+            }
+            const cont = document.querySelector(sel)
+            const tooltip = new bootstrap.Tooltip(cont, {
+                html: true,
+                title: title
+            });
+
+            if (isEmpty) { //Empty Tray
+                document.querySelector(`${sel} .name`).innerHTML = 'Empty';
+                document.querySelector(`${sel} .color_box`).classList.add('empty');
+                return;
+            }
+            if (tray.tray_type) {
+                document.querySelector(`${sel} .name`).innerHTML = tray.tray_type;
+            }
+            if (tray.cols) {
+                const el = document.querySelector(`${sel} .color`);
+                let color1 = tray.cols[0];
+                let color2 = tray.cols[1] || color1;
+                el.style.backgroundImage = `linear-gradient(90deg, #${color1}, #${color2})`;
+                let re = tray.remain;
+                el.style.height = `${re}%`;
+            }
+        });
+    });
+};
+
+const handleMachineInfo = (json) => {
+    let value;
+    const data = json.data;
+    const SEL = `.machine_${json.printer.id} .status`;
+    //console.log(json);
+    const update = (_sel, value) => {
+        let sel = `${SEL} ${_sel}`;
+        if (sel && value) {
+            const el = document.querySelector(sel);
+            if (el) {
+                el.innerHTML = value;
+            } else {
+                console.error(`Failed to find: ${sel}`);
+            }
+        }
+    };
+
+    if (data.mc_percent) {
+        const sel = `${SEL} .progress .progress-bar`;
+        const el = document.querySelector(sel);
+        let percent = data.mc_percent + '%';
+        if (percent === '100%') {
+            data.mc_remaining_time = '0';       
+        }
+        el.innerHTML = percent;
+        el.style.width = percent;
+    }
+    if (data.mc_remaining_time) {
+        const sel = `.remaining`;
+        value = `${data.mc_remaining_time} remaining`;
+        if (data.mc_remaining_time === '0') {
+            value = `machine idle`;
+        }
+        update(sel, value);
+    }
+    if (data.subtask_name) {
+        const sel = `.task_name`;
+        value = data.subtask_name.replace('.gcode.3mf', '');
+        update(sel, value);
+    }
+    if (data.total_layer_num) {
+        const sel = `.total_layer_num`;
+        value = data.total_layer_num;
+        update(sel, value);
+    }
+    if (data.layer_num) {
+        const sel = `.active_layer`;
+        value = data.layer_num;
+        update(sel, value);
+    }
+};
