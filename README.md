@@ -2,7 +2,16 @@
 
 You need to have Docker installed an running: https://www.docker.com/products/personal/
 
-I've only tested this on my Mac, but it "should just work"
+## Notes
+
+I've only tested this on my Mac, but it "should just work".
+I also only own and have access to my two X1C's, not sure if this will work with other models.
+
+## TODO
+
+* Figure out various camera issues.
+* Add an AMS section with colors & filament data.
+* Add the Temp/Fan data reported by BambuHandy
 
 ## Setup
 
