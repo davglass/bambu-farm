@@ -21,12 +21,12 @@ services:
       - rtsp-clients
     ports:
       - "9999:9999"
-#  app:
-#    build:
-#      dockerfile: ./app/Dockerfile
-#    depends_on:
-#      - rtsp-server
-#      - rtsp-clients
-#      - mqtt
-#    ports:
-#      - "9000:9000"
+  app:
+    build:
+      dockerfile: ./app/Dockerfile
+    depends_on:
+      - rtsp-server
+      - rtsp-clients
+      - mqtt
+    ports:
+      - "9000:9000"
