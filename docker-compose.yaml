@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  rtsp-server:
+    image: bluenviron/mediamtx:latest
+    expose:
+      - 8554
+    ports:
+      - "8554:8554"
+      - "8889:8889"
+      - "8888:8888"
+  rtsp-clients:
+    build:
+      dockerfile: ./clients/Dockerfile
+    depends_on:
+      - rtsp-server
+  mqtt:
+    build:
+      dockerfile: ./mqtt/Dockerfile
+    depends_on:
+      - rtsp-server
+      - rtsp-clients
+    ports:
+      - "9999:9999"
+#  app:
+#    build:
+#      dockerfile: ./app/Dockerfile
+#    depends_on:
+#      - rtsp-server
+#      - rtsp-clients
+#      - mqtt
+#    ports:
+#      - "9000:9000"
