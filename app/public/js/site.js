@@ -104,7 +104,19 @@ const handleMachineInfo = (json) => {
         }
     };
 
-    if (data.mc_percent) {
+    if ('mc_remaining_time' in data) {
+        const sel = `.remaining`;
+        value = `${data.mc_remaining_time} remaining`;
+        if (data.mc_remaining_time === 0) {
+            value = `machine idle`;
+            data.subtask_name = 'None';
+            data.total_layer_num = 0;
+            data.layer_num = 0;
+            data.mc_percent = 0;
+        }
+        update(sel, value);
+    }
+    if ('mc_percent' in data) {
         const sel = `${SEL} .progress .progress-bar`;
         const el = document.querySelector(sel);
         let percent = data.mc_percent + '%';
@@ -113,14 +125,6 @@ const handleMachineInfo = (json) => {
         }
         el.innerHTML = percent;
         el.style.width = percent;
-    }
-    if (data.mc_remaining_time) {
-        const sel = `.remaining`;
-        value = `${data.mc_remaining_time} remaining`;
-        if (data.mc_remaining_time === '0') {
-            value = `machine idle`;
-        }
-        update(sel, value);
     }
     if (data.subtask_name) {
         const sel = `.task_name`;
