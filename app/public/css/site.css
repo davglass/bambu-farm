@@ -41,6 +41,35 @@ header img {
     color: #fff;
     font-weight: bold;
     padding: .25em;
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.machine .ams .title .humidity {
+    background-color: #fff;
+    position: absolute;
+    right: 3px;
+    top: 2px;
+    height: 25px;
+    width: 25px;
+    border: 1px solid white;
+    border-radius: 1px;
+}
+
+.machine .ams .title .temp {
+    color: #00AE42;
+    background-color: #fff;
+    position: absolute;
+    right: 30px;
+    top: 2px;
+    height: 25px;
+    width: 55px;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 1px;
 }
 
 .machine .ams .color_box {

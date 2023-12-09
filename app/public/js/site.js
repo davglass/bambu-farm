@@ -7,6 +7,7 @@ const connect = () => {
     const ws = new WebSocket(WS_SERVER);
     ws.onmessage = (event) => {
         const json = JSON.parse(event.data);
+        //console.log(json.data);
         if (json.data && json.data.ams) {
             handleAMS(json);
         }
@@ -44,12 +45,19 @@ const handleAMS = (json) => {
     if (!Array.isArray(AMS)) {
         return;
     }
+/*
+tray_now: "0"
+tray_pre: "0"
+tray_tar: "0"
+*/
     AMS.forEach((ams) => {
         //console.log(ams);
         const sel = `${SEL} .ams_${ams.id}`;
         document.querySelector(sel).classList.remove('visually-hidden');
-        document.querySelector(`${sel} .temp`).innerHTML = ams.temp;
-        document.querySelector(`${sel} .humidity`).innerHTML = ams.humidity;
+        document.querySelector(`${sel} .temp`).innerHTML = ams.temp.replace(' ', '&nbsp;');
+        //document.querySelector(`${sel} .humidity`).innerHTML = ams.humidity;
+        const img = `/img/bambu/ams_humidity_${(ams.humidity - 1)}.svg`;
+        document.querySelector(`${sel} .humidity img`).src = img;
 
         ams.tray.forEach((tray) => {
             const sel = `${SEL} .ams_${ams.id} .tray_${tray.id}`;
@@ -87,7 +95,7 @@ const handleAMS = (json) => {
 };
 
 const handleMachineInfo = (json) => {
-    console.log(json);
+    //console.log(json);
 
     let value;
     const data = json.data;
@@ -162,8 +170,8 @@ const handleMachineInfo = (json) => {
             }
         });
     }
-    if ('spd_lv' in data) {
-        update(`.speed`, SPEEDS[data.spd_lv]);
+    if ('spd_lvl' in data) {
+        update(`.speed`, SPEEDS[data.spd_lvl]);
     }
 };
 
