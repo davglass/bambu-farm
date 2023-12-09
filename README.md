@@ -56,9 +56,10 @@ Create an entry for each printer you want to display.
 
 Now visit: https://127.0.0.1:9000/ to view all of your printers.
 
-### Known Issues
+## Camera Issues
 
-For me, once in a while the camera just stops reporting anything at all. Nothing from it seems to work. For this
-I have to reboot the printer and it will work for a while. Once it stops, then I reboot it again.
+[Camera Issues](docs/CAMERA.md)
 
-I'm still working on figuring our WTF is causing that.
+## Development
+
+[Development Steps](docs/DEVELOP.md)
