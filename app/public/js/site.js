@@ -87,10 +87,11 @@ const handleAMS = (json) => {
 };
 
 const handleMachineInfo = (json) => {
+    console.log(json);
+
     let value;
     const data = json.data;
     const SEL = `.machine_${json.printer.id} .status`;
-    //console.log(json);
     const update = (_sel, value) => {
         let sel = `${SEL} ${_sel}`;
         if (sel && value) {
@@ -140,8 +141,31 @@ const handleMachineInfo = (json) => {
         const key = `${name}_temper`;
         if (data[key]) {
             const sel = `.${name}`;
-            value = data[key];
+            value = data[key].replace(/ /g, '&nbsp;');
             update(sel, value);
         }
     });
+
+    if (data.lights_report) {
+        const sel = `${SEL} .light`;
+        data.lights_report.forEach((i) => {
+            if (i.node === 'chamber_light') {
+                let str = i.mode.toLowerCase();
+                str = `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+                let img = `/img/bambu/monitor_lamp_${i.mode}.svg`;
+                document.querySelector(sel).src = img;
+                update(`.lamp_status`, str);
+            }
+        });
+    }
+    if ('spd_lv' in data) {
+        update(`.speed`, SPEEDS[data.spd_lv]);
+    }
+};
+
+const SPEEDS = {
+    1: 'Silent',
+    2: 'Normal',
+    3: 'Sport',
+    4: 'Ludicrous'
 };

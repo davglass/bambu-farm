@@ -10,17 +10,58 @@
             IP Address: {{ip}}">{{name}}</h2>
         <iframe src="http://127.0.0.1:8888/{{id}}" scrolling="no" width="100%" height="300"></iframe>
         <div class="status">
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated">0%</div>
+            <div class="container text-center icons">
+                <div class="row">
+                    <div class="col">
+                        <div class="wrapper">
+                            <img src="/img/bambu/monitor_bed_temp.svg" title="Bed Temperature"><br>
+                            <span class="bed">0° C</span><br>
+                            <span class="bed_target">0° C</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="wrapper">
+                            <img src="/img/bambu/monitor_nozzle_temp.svg" title="Nozzle Temperature"><br>
+                            <span class="nozzle">0° C</span><br>
+                            <span class="nozzle_target">0° C</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="wrapper">
+                            <img src="/img/bambu/monitor_frame_temp.svg" title="Chamber Temperature"><br>
+                            <span class="chamber">0° C</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="wrapper">
+                            <img src="/img/bambu/monitor_speed_active.svg" title="Speed"><br>
+                            <span class="speed">Normal</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="wrapper">
+                            <img src="/img/bambu/monitor_lamp_off.svg" title="Lamp" class="light"><br>
+                            <span class="lamp_status">Off</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul>
-                <li class="task_name">None</li>
-                <li><span class="remaining">n/a</span></li>
-                <li>Printed layers: <span class="active_layer">0</span> of <span class="total_layer_num">0</span></li>
-                <li><img src="/img/bambu/monitor_bed_temp.svg" title="Bed Temperature"> <span class="bed"></span>/<span class="bed_target"></span></li>
-                <li><img src="/img/bambu/monitor_nozzle_temp.svg" title="Nozzle Temperature"> <span class="nozzle"></span>/<span class="nozzle_target"></span></li>
-                <li><img src="/img/bambu/monitor_frame_temp.svg" title="Chamber Temperature"> <span class="chamber"></span></li>
-            </ul>
+            <div>
+                <h4 class="task_name"></h4>
+                <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <span class="remaining">n/a</span>
+                    </div>
+                    <div class="col text-end">
+                        Layer <span class="active_layer">0</span> of <span class="total_layer_num">0</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated"></div>
+            </div>
         </div>
         <div class="ams">
             {{#each ../ams}}
