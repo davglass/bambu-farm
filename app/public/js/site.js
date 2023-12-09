@@ -41,6 +41,9 @@ const handleAMS = (json) => {
         AMS.push(ams3);
         AMS.push(ams4);
     }*/
+    if (!Array.isArray(AMS)) {
+        return;
+    }
     AMS.forEach((ams) => {
         //console.log(ams);
         const sel = `${SEL} .ams_${ams.id}`;
@@ -57,7 +60,7 @@ const handleAMS = (json) => {
                 let name = tray.name || tray.tray_type;
                 title = `${name}<br>${tray.remain}% remaining`;
             }
-            const cont = document.querySelector(sel)
+            const cont = document.querySelector(`${sel} .color_box`)
             const tooltip = new bootstrap.Tooltip(cont, {
                 html: true,
                 title: title
@@ -133,4 +136,12 @@ const handleMachineInfo = (json) => {
         value = data.layer_num;
         update(sel, value);
     }
+    ['chamber', 'bed', 'bed_target', 'nozzle', 'nozzle_target'].forEach((name) => {
+        const key = `${name}_temper`;
+        if (data[key]) {
+            const sel = `.${name}`;
+            value = data[key];
+            update(sel, value);
+        }
+    });
 };

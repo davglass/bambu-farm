@@ -36,7 +36,9 @@ const handler = (machine) => {
     //RTSP to RTSP
     //const args = [`-hide_banner`, `-rtsp_transport`, `tcp`, `-i`, `${url}`, `-c:v`, `copy`, `-f`, `rtsp`, `${published}`];
     //RTSP to WEBRTC
-    const args = [`-hide_banner`, `-rtsp_transport`, `tcp`, `-i`, `${url}`, `-pix_fmt`, `yuv420p`, `-c:v`, `libx264`, `-preset`, `ultrafast`, `-b:v`, `600k`, `-f`, `rtsp`, `${published}` ];
+    //const args = [`-hide_banner`, `-rtsp_transport`, `tcp`, `-i`, `${url}`, `-pix_fmt`, `yuv420p`, `-c:v`, `libx264`, `-preset`, `ultrafast`, `-b:v`, `600k`, `-f`, `rtsp`, `${published}` ];
+    const args = [`-hide_banner`, `-fflags`, `nobuffer`, `-flags`, `low_delay`, `-analyzeduration`, `10`, `-probesize`, `3200`, `-rtsp_transport`, `tcp`, `-i`, `${url}`, `-pix_fmt`, `yuv420p`, `-c:v`, `libx264`, `-preset`, `ultrafast`, `-b:v`, `600k`, `-f`, `rtsp`, `${published}` ];
+    
     log(`${cmd} ${args.join(' ')}`);
     
     const result = spawn(cmd, args);

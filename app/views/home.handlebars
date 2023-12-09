@@ -17,12 +17,15 @@
                 <li class="task_name">None</li>
                 <li><span class="remaining">n/a</span></li>
                 <li>Printed layers: <span class="active_layer">0</span> of <span class="total_layer_num">0</span></li>
+                <li><img src="/img/bambu/monitor_bed_temp.svg" title="Bed Temperature"> <span class="bed"></span>/<span class="bed_target"></span></li>
+                <li><img src="/img/bambu/monitor_nozzle_temp.svg" title="Nozzle Temperature"> <span class="nozzle"></span>/<span class="nozzle_target"></span></li>
+                <li><img src="/img/bambu/monitor_frame_temp.svg" title="Chamber Temperature"> <span class="chamber"></span></li>
             </ul>
         </div>
         <div class="ams">
             {{#each ../ams}}
             <div class="ams_{{@key}} visually-hidden">
-                <div class="title">AMS {{this}} <span class="temp"></span> <span class="humidity"></span></div>
+                <div class="title">AMS {{this}} <span class="temp visually-hidden"></span> <span class="humidity visually-hidden"></span></div>
                 <div class="container text-center">
                     <div class="row">
                     {{#each ../../trays}}

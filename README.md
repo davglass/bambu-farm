@@ -1,5 +1,8 @@
 # BambuLab Printer Farm Monitor
 
+![Screenshot](docs/shot.png?raw=true "Screenshot")
+
+
 You need to have Docker installed an running: https://www.docker.com/products/personal/
 
 ## Notes
@@ -9,9 +12,7 @@ I also only own and have access to my two X1C's, not sure if this will work with
 
 ## TODO
 
-* Figure out various camera issues.
-* Add an AMS section with colors & filament data.
-* Add the Temp/Fan data reported by BambuHandy
+* Add the Fan/Light data.
 
 ## Setup
 
