@@ -145,4 +145,7 @@ header .wrapper {
     .machine .ams .color_box {
         border-color: #fff;
     }
+    .machine .ams .color {
+        border-top-color: #fff; 
+    }
 }
