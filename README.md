@@ -1,6 +1,7 @@
 # BambuLab Printer Farm Monitor
 
-![Screenshot](docs/shot.png?raw=true "Screenshot")
+![Screenshot Light](docs/shot.png?raw=true "Screenshot Light Mode")
+![Screenshot Dark](docs/shot-dark.png?raw=true "Screenshot Dark Mode")
 
 
 You need to have Docker installed an running: https://www.docker.com/products/personal/

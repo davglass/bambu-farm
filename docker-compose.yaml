@@ -10,11 +10,13 @@ services:
       - "8888:8888"
   rtsp-clients:
     build:
+      context: ./
       dockerfile: ./clients/Dockerfile
     depends_on:
       - rtsp-server
   mqtt:
     build:
+      context: ./
       dockerfile: ./mqtt/Dockerfile
     depends_on:
       - rtsp-server
@@ -23,6 +25,7 @@ services:
       - "9999:9999"
   app:
     build:
+      context: ./
       dockerfile: ./app/Dockerfile
     depends_on:
       - rtsp-server

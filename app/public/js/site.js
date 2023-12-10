@@ -1,13 +1,24 @@
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
-const WS_SERVER = "ws://127.0.0.1:9999/";
+
+
+// Setting the WS & video stream to the proper IP if this container
+// isn't loaded from localhost..
+const HOST = location.hostname;
+const WS_SERVER = `ws://${HOST}:9999/`;
+window.MACHINES.forEach((machine) => {
+    const src = `http://${HOST}:8888/${machine.id}`;
+    const sel = `.machine_${machine.id} iframe`;
+    const el = document.querySelector(sel);
+    el.src = src;
+});
 
 const connect = () => {
     const ws = new WebSocket(WS_SERVER);
     ws.onmessage = (event) => {
         const json = JSON.parse(event.data);
-        //console.log(json.data);
+        console.log(json.data);
         if (json.data && json.data.ams) {
             handleAMS(json);
         }
