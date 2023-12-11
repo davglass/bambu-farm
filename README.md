@@ -14,8 +14,8 @@ I also only own and have access to my two X1C's, not sure if this will work with
 
 ## TODO
 
-* Figure out how to see what AMS filament is being used.
-* Add the Fan data.
+* Integrate FTPS to view the contents of the printer.
+  * Possibly allow uploads directly to a printer.
 
 ## Setup
 

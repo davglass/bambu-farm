@@ -50,6 +50,10 @@ const handleAMS = (json) => {
     //console.log(json);
     const SEL = `.machine_${json.printer.id} .ams`;
     const AMS = json.data.ams.ams;
+    const NOW = Number(json.data.ams.tray_now); //Current Loaded Filament
+    let CURRENT; //Holder for current spool
+    let counter = 0; //Counter for spool calculations
+
     //testing
     /*
     if (AMS.length == 2) {
@@ -64,11 +68,32 @@ const handleAMS = (json) => {
     if (!Array.isArray(AMS)) {
         return;
     }
-/*
-tray_now: "0"
-tray_pre: "0"
-tray_tar: "0"
-*/
+    AMS.forEach(ams => {
+        ams.tray.forEach(tray => {
+            if (counter === NOW) {
+                CURRENT = {
+                    ams: ams,
+                    tray: tray
+                };
+            }
+            counter++;
+        });
+    });
+    //NOW === 255 when nothing is loaded..
+    // Handle loaded filament color
+    if (NOW === 255) {
+        const sel = `${SEL} .tray.active`;
+        document.querySelectorAll(sel).forEach(el => {
+            el.classList.remove('active');
+        });
+
+    } else {
+        if (CURRENT) {
+            const sel = `${SEL} .ams_${CURRENT.ams.id} .tray_${CURRENT.tray.id}`;
+            const el = document.querySelector(sel);
+            el.classList.add('active');
+        }
+    }
     AMS.forEach((ams) => {
         //console.log(ams);
         const sel = `${SEL} .ams_${ams.id}`;

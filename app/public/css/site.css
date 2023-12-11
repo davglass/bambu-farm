@@ -88,6 +88,11 @@ header .wrapper {
     border-radius: 1px;
 }
 
+.machine .ams .tray.active {
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
 .machine .ams .color_box {
     display: inline-block;
     height: 40px;
