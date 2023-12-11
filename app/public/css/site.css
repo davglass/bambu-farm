@@ -133,6 +133,18 @@ header .wrapper {
     height: 100%;
 }
 
+.status .firmware-update {
+    border: 1px solid red;
+    margin: 1em;
+    border-radius: 5px;
+    padding: .5em;
+}
+
+.status .firmware-update img {
+    vertical-align: top;
+}
+
+/* System Dark */
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #121212;
@@ -148,4 +160,44 @@ header .wrapper {
     .machine .ams .color {
         border-top-color: #fff; 
     }
+}
+
+/* Forcing Dark */
+
+body.dark {
+    background-color: #121212;
+    color: #fff;
+}
+body.dark header {
+    background-color: #00AE42;
+    color: #fff;
+}
+body.dark .machine .ams .color_box {
+    border-color: #fff;
+}
+body.dark .machine .ams .color {
+    border-top-color: #fff; 
+}
+
+/* Theme Min */
+body.min .status .icons {
+    display: none;
+}
+
+body.min .ams .title {
+    display: none;
+}
+
+body.min .ams .key, body.min .ams .name, body.min .ams br {
+    display: none;
+}
+
+body.min .ams .color_box {
+    height: 20px;
+    width: 20px;
+}
+
+body.min .ams .ams_0, body.min .ams .ams_1, body.min .ams .ams_2, body.min .ams .ams_3 {
+    width: 45%;
+    float: left;
 }

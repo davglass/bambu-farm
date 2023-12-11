@@ -33,6 +33,18 @@ app.get('/', (req, res) => {
     res.locals.machines = MACHINES;
     res.locals.ams = ['A', 'B', 'C', 'D'];
     res.locals.trays = ['1', '2', '3', '4'];
+    res.locals.themeClass = '';
+    if (req.query.theme) {
+        if (['dark', 'min', 'dark-min', 'min-dark'].includes(req.query.theme)) {
+            res.locals.themeClass = req.query.theme.replace('-', ' ');
+            let t = res.locals.themeClass;
+            if (t === 'min-dark') {
+                t = 'dark-min';
+            }
+            let theme = `theme_${t.replace(' ', '_')}`;
+            res.locals[theme] = true;;
+        }
+    }
     res.render('home');
 });
 

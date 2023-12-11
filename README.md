@@ -1,8 +1,11 @@
 # BambuLab Printer Farm Monitor
 
-![Screenshot Light](docs/shot.png?raw=true "Screenshot Light Mode")
-![Screenshot Dark](docs/shot-dark.png?raw=true "Screenshot Dark Mode")
+Themes: Light, Minimal, Dark & Dark Minimal
 
+<img src="docs/shot.png?raw=true" width="300">
+<img src="docs/shot-dark.png?raw=true" width="300">
+<img src="docs/shot-min.png?raw=true" width="300">
+<img src="docs/shot-dark-min.png?raw=true" width="300">
 
 You need to have Docker installed an running: https://www.docker.com/products/personal/
 

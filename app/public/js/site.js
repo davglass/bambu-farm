@@ -1,7 +1,14 @@
+// Tooltips
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
 
+//Theme Selector
+document.querySelector(`header .wrapper select`).addEventListener('change', (e) => {
+    const target = e.target;
+    const value = target.options[target.selectedIndex].value;
+    location.href = `/?theme=${value}`;
+});
 
 // Setting the WS & video stream to the proper IP if this container
 // isn't loaded from localhost..
@@ -18,7 +25,7 @@ const connect = () => {
     const ws = new WebSocket(WS_SERVER);
     ws.onmessage = (event) => {
         const json = JSON.parse(event.data);
-        console.log(json.data);
+        //console.log(json.data);
         if (json.data && json.data.ams) {
             handleAMS(json);
         }
@@ -52,7 +59,8 @@ const handleAMS = (json) => {
         ams4.id = 3;
         AMS.push(ams3);
         AMS.push(ams4);
-    }*/
+    }
+    */
     if (!Array.isArray(AMS)) {
         return;
     }
@@ -92,6 +100,7 @@ tray_tar: "0"
             }
             if (tray.tray_type) {
                 document.querySelector(`${sel} .name`).innerHTML = tray.tray_type;
+                document.querySelector(`${sel} .color_box`).classList.remove('empty');
             }
             if (tray.cols) {
                 const el = document.querySelector(`${sel} .color`);
@@ -122,6 +131,24 @@ const handleMachineInfo = (json) => {
             }
         }
     };
+    if (data.upgrade_state && data.upgrade_state.ota_new_version_number) {
+        const ver = data.upgrade_state.ota_new_version_number;
+        console.info('New Firmware Version', ver, json.printer);
+        const st = document.querySelector(SEL);
+        const el = document.createElement('div');
+        el.className = 'firmware-update';
+        el.innerHTML = `<img src="/img/bambu/hms_notify_lv2.svg"> New Firmware Available: ${ver}`;
+        st.insertBefore(el, st.firstChild);
+    } else {
+        const el = document.querySelector(`${SEL} .firmware-update`);
+        if (el) {
+            el.parentNode.removeChild(el);
+        }
+    }
+    if (data.upgrade_state && data.upgrade_state.progress !== '0') {
+        data.subtask_name = 'Firmware Updating';
+        data.mc_percent = Number(data.upgrade_state.progress);
+    }
 
     if ('mc_remaining_time' in data) {
         const sel = `.remaining`;
@@ -148,6 +175,9 @@ const handleMachineInfo = (json) => {
     if (data.subtask_name) {
         const sel = `.task_name`;
         value = data.subtask_name.replace('.gcode.3mf', '');
+        if (value === 'auto_cali_for_user_param.gcode') {
+            value = 'Auto Calibration';
+        }
         update(sel, value);
     }
     if (data.total_layer_num) {

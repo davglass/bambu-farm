@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="/css/site.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="{{themeClass}}">
     <header>
     <div class="container text-left">
         <div class="row">
@@ -15,6 +15,12 @@
             <div class="col-2">
                 <div class="wrapper">
                     <a title="View Source on Github" href="https://github.com/davglass/bambu-farm"><img src="/img/github.svg" class="github"> davglass</a>
+                    <br><select id="themes" class="form-select form-select-sm">
+                    <option value="default">Theme</option>
+                    <option value="dark"{{#if theme_dark}} selected{{/if}}>Dark</option>
+                    <option value="min"{{#if theme_min}} selected{{/if}}>Minimal</option>
+                    <option value="dark-min"{{#if theme_dark_min}} selected{{/if}}>Dark & Minimal</option>
+                    </select>
                 </div>
             </div>
         </div>
