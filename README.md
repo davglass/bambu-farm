@@ -33,20 +33,22 @@ There are a few things that need to be done/gathered with the printers:
 Now, create a `config.json` file in the repos main directory that looks like this:
 
 ```json
-[
-    {
-        "id": "<Device Serial Number>",
-        "name": "<Display Name of the printer>",
-        "token": "<Access Code>",
-        "ip": "<IP Address>"
-    },
-    {
-        "id": "<Device Serial Number>",
-        "name": "<Display Name of the printer>",
-        "token": "<Access Code>",
-        "ip": "<IP Address>"
-    }
-]
+{
+    "machines": [
+        {
+            "id": "<Device Serial Number>",
+            "name": "<Display Name of the printer>",
+            "token": "<Access Code>",
+            "ip": "<IP Address>"
+        },
+        {
+            "id": "<Device Serial Number>",
+            "name": "<Display Name of the printer>",
+            "token": "<Access Code>",
+            "ip": "<IP Address>"
+        }
+    ]
+}
 ```
 
 Create an entry for each printer you want to display.

@@ -1,0 +1,16 @@
+<h2>Timelapse: {{name}}</h2>
+
+<div class="container text-center thumbs">
+  <div class="row row-cols-3">
+    {{#each thumbs}}
+    <div class="col">
+        <div class="image">
+            <img src="/img/downloads/{{../machine}}/{{this}}">
+            <div class="info">
+                <a href="/timelapse/{{../machine}}/{{this}}">Download</a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

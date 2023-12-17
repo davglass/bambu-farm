@@ -11,7 +11,12 @@ if (!fs.existsSync(CONFIG)) { //Outside docker container
     CONFIG = `../config.json`;
 }
 
-const MACHINES = require(CONFIG);
+let MACHINES = require(CONFIG);
+
+if (!Array.isArray(MACHINES)) {
+    MACHINES = MACHINES.machines;
+}
+
 
 const wss = require('./wss.js');
 wss.init(MACHINES);

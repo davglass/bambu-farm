@@ -1,0 +1,20 @@
+<h2>GCode Files: {{name}}</h2>
+
+<table class="gcode" width="90%" cellpadding="5" cellspacing="5">
+<thead>
+    <tr>
+        <th>File Name</th>
+        <th>Last Modified</th>
+        <th>File Size</th>
+    </tr>
+</thead>
+<tbody>
+    {{#each gcode}}
+    <tr>
+        <td><a href="/gcode/{{../machine}}/{{rawName}}" title="{{rawName}}">{{name}}</a></td>
+        <td class="text-right">{{stamp}}</td>
+        <td class="text-right">{{size}}</td>
+    </tr>
+    {{/each}}
+</tbody>
+</table>

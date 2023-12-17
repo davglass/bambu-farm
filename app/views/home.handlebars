@@ -7,8 +7,10 @@
             data-bs-toggle="tooltip" data-bs-placement="bottom"
             data-bs-custom-class="custom-tooltip"
             data-bs-title="Serial: {{id}}
-            IP Address: {{ip}}">{{name}}</h2>
-        <!--iframe src="http://127.0.0.1:8888/{{id}}" scrolling="no" width="100%" height="300"></iframe-->
+            IP Address: {{ip}}">{{name}}
+            <a class="gcode"href="/gcode/{{id}}?theme={{../theme}}" title="View Files"><img src="/img/bambu/sdcard_state_normal.svg"></a>
+            <a class="timelapse" href="/timelapse/{{id}}?theme={{../theme}}" title="View Timelapse"><img src="/img/bambu/monitor_timelapse_on.svg"></a>
+        </h2>
         <iframe src="about:blank" scrolling="no" width="100%" height="300"></iframe>
         <div class="status">
             <div class="container text-center icons">
@@ -90,3 +92,4 @@
 <script>
     window.MACHINES = {{{json machines}}};
 </script>
+<script src="/js/home.js"></script>

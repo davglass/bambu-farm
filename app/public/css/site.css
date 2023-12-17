@@ -24,7 +24,7 @@ header a {
 
 header .wrapper {
     height: 100%;
-    padding-top: 1em;
+    padding-top: .25em;
 }
 
 .machine {
@@ -37,6 +37,20 @@ header .wrapper {
     font-weight: bold;
     margin-bottom: 0;
     padding-left: 1em;
+    position: relative;
+}
+
+.machine h2 .timelapse img {
+    position: absolute;
+    top: 9px;
+    right: 5px;
+}
+
+.machine h2 .gcode img {
+    position: absolute;
+    top: 9px;
+    right: 50px;
+    height: 20px;
 }
 
 .machine .progress {
@@ -149,6 +163,71 @@ header .wrapper {
     vertical-align: top;
 }
 
+.thumbs img {
+    height: 200px;
+    width: 350px;
+    margin: 1em;
+}
+
+.thumbs .col {
+    position: relative;
+}
+
+.thumbs .col .info {
+    display: none;
+    position: absolute;
+    background-color: #000;
+    text: #fff;
+    bottom: 15px;
+    left: 45px;
+    width: 79%;
+    padding: 1em;
+}
+
+.thumbs .col .info a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.thumbs .image:hover .info {
+    display: block;
+}
+
+table.gcode {
+    margin: 2em;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+table.gcode thead th {
+    background-color: #00AE42;
+    color: #fff;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+table.gcode .text-right {
+    text-align: right;
+}
+
+table.gcode tbody td {
+    border-right: 1px solid #000;
+}
+
+table.gcode tbody tr {
+    border-bottom: 1px solid #000;
+}
+
+table.gcode a {
+    text-decoration: none;
+    color: #000;
+}
+
+table.gcode a:hover {
+    text-decoration: underline;
+}
+
 /* System Dark */
 @media (prefers-color-scheme: dark) {
     body {
@@ -164,6 +243,18 @@ header .wrapper {
     }
     .machine .ams .color {
         border-top-color: #fff; 
+    }
+    body.dark table.gcode  {
+        border-color: #fff;
+    }
+    body.dark table.gcode a {
+        color: #fff;
+    }
+    body.dark table.gcode tbody td {
+        border-color: #fff;
+    }
+    body.dark table.gcode tbody tr {
+        border-color: #fff;
     }
 }
 
@@ -182,6 +273,18 @@ body.dark .machine .ams .color_box {
 }
 body.dark .machine .ams .color {
     border-top-color: #fff; 
+}
+body.dark table.gcode  {
+    border-color: #fff;
+}
+body.dark table.gcode a {
+    color: #fff;
+}
+body.dark table.gcode tbody td {
+    border-color: #fff;
+}
+body.dark table.gcode tbody tr {
+    border-color: #fff;
 }
 
 /* Theme Min */

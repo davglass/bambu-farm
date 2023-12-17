@@ -1,18 +1,22 @@
 #!/usr/bin/env node
 
-const conf = require('/app/config/config.json');
+let conf = require('/app/config/config.json');
+
+if (Array.isArray(conf)) {
+    conf = { machines: conf };
+}
 
 const COUNTER = {};
 
 const RESTART = 1000;
 const STARTUP_CHECK = (1 * 15) * 1000;
 
-if (conf.length === 0) {
+if (conf.machines.length === 0) {
     console.error(`Failed to find array of machines..`);
     process.exit(1);
 }
 
-console.log(`Starting ${conf.length} streaming camera services..`)
+console.log(`Starting ${conf.machines.length} streaming camera services..`)
 
 const { spawn } = require('child_process');
 
@@ -81,4 +85,4 @@ const handler = (machine) => {
 };
 
 // Start the streams..
-conf.forEach(handler);
+conf.machines.forEach(handler);
