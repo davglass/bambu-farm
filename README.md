@@ -32,6 +32,8 @@ There are a few things that need to be done/gathered with the printers:
 
 Now, create a `config.json` file in the repos main directory that looks like this:
 
+If you install my [`bambu-cli`](https://github.com/davglass/bambu-cli), it's even easier: `bambu-cli config > config.json`
+
 ```json
 {
     "machines": [
@@ -68,3 +70,4 @@ Now visit: https://127.0.0.1:9000/ to view all of your printers.
 ## Development
 
 [Development Steps](docs/DEVELOP.md)
+
