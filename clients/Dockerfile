@@ -6,7 +6,7 @@ RUN mkdir -p /app/bin
 RUN mkdir -p /app/config
 
 COPY ../config.json /app/config/config.json
-COPY ./clients/bin/* /app/bin/
+COPY ../clients/bin/*.js /app/bin/
 
 WORKDIR /app
 
