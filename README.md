@@ -1,5 +1,10 @@
 # BambuLab Printer Farm Monitor
 
+> [!CAUTION]
+> This repo is no longer usable. Bambu Labs has made it very clear they do not want
+> users to interact with their printers. You can no longer log into their website
+> which is needed to use this system.
+
 Themes: Light, Minimal, Dark & Dark Minimal
 
 <img src="docs/shot.png?raw=true" width="300"> <img src="docs/shot-dark.png?raw=true" width="300">
